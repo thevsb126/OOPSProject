@@ -1,42 +1,65 @@
 package watermanagement;
 
-public class Family<E> implements Consumer<E> {
-	private int famno, adults, minors, watpts;
-	private double waterconsumed, extracharge;
-	
-	public Family() {
-		famno = 0;
+class Family implements Consumer
+{
+
+	public int num, adults, children;
+	public float wgiven, wused, wpoints;
+
+	Family()
+	{
+		num = 0;
 		adults = 0;
-		minors = 0;
-		waterconsumed = 0.0;
-		extracharge = 0.0;
+		children = 0;
+		wgiven = ((1500.0*adults) + (750.0*children));
 	}
-	
-	public Family(int a, int b, int c) {
-		famno = a;
-		adults = b;
-		minors = c;
-	}
-	
-	public int getAdults() {
-		return adults;
-	}
-	
-	public int getMinors() {
-		return minors;
-	}
-	
-	public void setWater(double x) {
-		waterconsumed = x;
-	}
-	
-	public E search(E[] obj,int x)
+
+	Family(int num1, int adults1, int children1)
 	{
-		
+		num = num1;
+		adults = adults1;
+		children = children1;
+		wgiven = ((1500.0*adults) + (750.0*children));
 	}
-	
-	public void insert(Family<E> [] obj, Family<E> iobj,  int x)
+
+	public void updateDetails(int num1, int adults1, int children1)
 	{
-		iobj.setWater();
+		num = num1;
+		adults = adults1;
+		children = children1;
+		wgiven = ((1500.0*adults) + (750.0*children));
 	}
+
+	public void getDetails()
+	{
+		System.out.println("The number of members in the family: " + num);
+		System.out.println("Number of adults: " + adults);
+		System.out.println("Number of children: " + children);
+		System.out.println("Water Currency alloted: " + wgiven + " litres per month");
+	}
+
+	public void UsageEntry(float entry)
+	{
+		wused = entry;
+	}
+
+	public float calWaterPoints()
+	{
+		wpoints = (wgiven/wused)*100;
+		System.out.println("The water points collected: ");
+		return wpoints;
+	}
+
+	public float getUsage()
+	{
+		System.out.println("Amount of Water Used: " + wused);
+		return wused;
+	}
+
+	public float calWaterCurrency()
+	{
+		wgiven = ((1500.0*adults) + (750.0*children));
+		return wgiven;
+	}
+
 }
